@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lingyun.shop.manager.dao.MemberRankMapper">
+    <resultMap id="BaseResultMap" type="com.lingyun.shop.manager.common.entity.MemberRank">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="createdDate" property="createddate" jdbcType="TIMESTAMP"/>
+        <result column="lastModifiedDate" property="lastmodifieddate" jdbcType="TIMESTAMP"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="amount" property="amount" jdbcType="DECIMAL"/>
+        <result column="isDefault" property="isdefault" jdbcType="BIT"/>
+        <result column="isSpecial" property="isspecial" jdbcType="BIT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="scale" property="scale" jdbcType="DOUBLE"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, createdDate, lastModifiedDate, version, amount, isDefault, isSpecial, name, scale
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from MemberRank
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from MemberRank
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.lingyun.shop.manager.common.entity.MemberRank">
+    insert into MemberRank (id, createdDate, lastModifiedDate, 
+      version, amount, isDefault, 
+      isSpecial, name, scale)
+    values (#{id,jdbcType=BIGINT}, #{createddate,jdbcType=TIMESTAMP}, #{lastmodifieddate,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=BIGINT}, #{amount,jdbcType=DECIMAL}, #{isdefault,jdbcType=BIT}, 
+      #{isspecial,jdbcType=BIT}, #{name,jdbcType=VARCHAR}, #{scale,jdbcType=DOUBLE})
+  </insert>
+    <insert id="insertSelective" parameterType="com.lingyun.shop.manager.common.entity.MemberRank">
+        insert into MemberRank
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="createddate != null">
+                createdDate,
+            </if>
+            <if test="lastmodifieddate != null">
+                lastModifiedDate,
+            </if>
+            <if test="version != null">
+                version,
+            </if>
+            <if test="amount != null">
+                amount,
+            </if>
+            <if test="isdefault != null">
+                isDefault,
+            </if>
+            <if test="isspecial != null">
+                isSpecial,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="scale != null">
+                scale,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="createddate != null">
+                #{createddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastmodifieddate != null">
+                #{lastmodifieddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="version != null">
+                #{version,jdbcType=BIGINT},
+            </if>
+            <if test="amount != null">
+                #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="isdefault != null">
+                #{isdefault,jdbcType=BIT},
+            </if>
+            <if test="isspecial != null">
+                #{isspecial,jdbcType=BIT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="scale != null">
+                #{scale,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lingyun.shop.manager.common.entity.MemberRank">
+        update MemberRank
+        <set>
+            <if test="createddate != null">
+                createdDate = #{createddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastmodifieddate != null">
+                lastModifiedDate = #{lastmodifieddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="version != null">
+                version = #{version,jdbcType=BIGINT},
+            </if>
+            <if test="amount != null">
+                amount = #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="isdefault != null">
+                isDefault = #{isdefault,jdbcType=BIT},
+            </if>
+            <if test="isspecial != null">
+                isSpecial = #{isspecial,jdbcType=BIT},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="scale != null">
+                scale = #{scale,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lingyun.shop.manager.common.entity.MemberRank">
+    update MemberRank
+    set createdDate = #{createddate,jdbcType=TIMESTAMP},
+      lastModifiedDate = #{lastmodifieddate,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=BIGINT},
+      amount = #{amount,jdbcType=DECIMAL},
+      isDefault = #{isdefault,jdbcType=BIT},
+      isSpecial = #{isspecial,jdbcType=BIT},
+      name = #{name,jdbcType=VARCHAR},
+      scale = #{scale,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="findAll" parameterType="com.lingyun.shop.manager.common.entity.MemberRank" resultMap="BaseResultMap">
+    SELECT * FROM MemberRank
+  </select>
+
+    <select id="findOne" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    SELECT * FROM MemberRank where id=#{id}
+  </select>
+</mapper>

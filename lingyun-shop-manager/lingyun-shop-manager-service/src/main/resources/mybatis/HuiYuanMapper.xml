@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lingyun.shop.manager.dao.HuiYuanMapper">
+    <resultMap id="BaseResultMap" type="com.lingyun.shop.manager.common.entity.HuiYuan">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="youxiang" property="youxiang" jdbcType="VARCHAR"/>
+        <result column="cjtime" property="cjtime" jdbcType="TIMESTAMP"/>
+        <result column="pid" property="pid" jdbcType="INTEGER"/>
+        <result column="yonghuname" property="yonghuname" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, youxiang, cjtime, pid, yonghuname
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from huiyuan
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from huiyuan
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.lingyun.shop.manager.common.entity.HuiYuan">
+    insert into huiyuan (id, youxiang, cjtime,
+      pid, yonghuname)
+    values (#{id,jdbcType=INTEGER}, #{youxiang,jdbcType=VARCHAR}, #{cjtime,jdbcType=TIMESTAMP},
+      #{pid,jdbcType=INTEGER}, #{yonghuname,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.lingyun.shop.manager.common.entity.HuiYuan">
+        insert into huiyuan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="youxiang != null">
+                youxiang,
+            </if>
+            <if test="cjtime != null">
+                cjtime,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="yonghuname != null">
+                yonghuname,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="youxiang != null">
+                #{youxiang,jdbcType=VARCHAR},
+            </if>
+            <if test="cjtime != null">
+                #{cjtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="pid != null">
+                #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="yonghuname != null">
+                #{yonghuname,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lingyun.shop.manager.common.entity.HuiYuan">
+        update huiyuan
+        <set>
+            <if test="youxiang != null">
+                youxiang = #{youxiang,jdbcType=VARCHAR},
+            </if>
+            <if test="cjtime != null">
+                cjtime = #{cjtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="pid != null">
+                pid = #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="yonghuname != null">
+                yonghuname = #{yonghuname,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lingyun.shop.manager.common.entity.HuiYuan">
+    update huiyuan
+    set youxiang = #{youxiang,jdbcType=VARCHAR},
+      cjtime = #{cjtime,jdbcType=TIMESTAMP},
+      pid = #{pid,jdbcType=INTEGER},
+      yonghuname = #{yonghuname,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="findtwo" resultMap="BaseResultMap">
+    SELECT * FROM huiyuan h left join memberrank m on h.pid=m.id
+  </select>
+</mapper>
